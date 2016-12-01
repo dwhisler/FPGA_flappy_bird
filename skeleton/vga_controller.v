@@ -5,9 +5,12 @@ module vga_controller(iRST_n,
                       oVS,
                       b_data,
                       g_data,
-                      r_data);
+                      r_data,
+							 bird_y_long,
+							 processor_CLK);
 input iRST_n;
 input iVGA_CLK;
+input processor_CLK;
 output reg oBLANK_n;
 output reg oHS;
 output reg oVS;
@@ -25,8 +28,9 @@ wire cBLANK_n,cHS,cVS,rst;
 
 //// ANIMATION
 
-reg [18:0] bird_x = 19'd0;
-reg [18:0] bird_y = 19'd200;
+reg [18:0] bird_x = 19'd320;
+input [31:0] bird_y_long;
+reg [18:0] bird_y;
 
 reg [18:0] pipe_x = 19'd200;
 reg [18:0] pipe_y = 19'd200;
@@ -103,6 +107,15 @@ video_sync_generator LTM_ins (.vga_clk(iVGA_CLK),
 										
 										
 ////
+//always @(posedge processor_CLK)
+//begin
+//	animation_count = animation_count + 1;
+//	if (animation_count == 9'd100);
+//	begin
+//		bird_y = bird_y_long[18:0];
+//	end
+//end
+
 
 
 ////Address generator
@@ -124,9 +137,11 @@ begin
 	  
 	  animation_count = animation_count + 1;
 	  
-	  if (animation_count == 5'd25)
+	  if (animation_count == 5'd30)
 		begin
-			animation_count = 5'd0;			
+			animation_count = 6'd0;	
+			
+			bird_y = bird_y_long[18:0];
 			
 			lower_pipe_x <= pipe_x-lower_pipe_width/2;
 			lower_pipe_y <= pipe_y+gap_width/2;
@@ -165,9 +180,11 @@ begin
 	  
 	  animation_count = animation_count + 1;
 	  
-	  if (animation_count == 5'd25)
+	  if (animation_count == 5'd30)
 		begin
-			animation_count = 5'd0;
+			animation_count = 6'd0;
+			
+			bird_y = bird_y_long[18:0];
 			
 			lower_pipe_x <= pipe_x-lower_pipe_width/2;
 			lower_pipe_y <= pipe_y+gap_width/2;
