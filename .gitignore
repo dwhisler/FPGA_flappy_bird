@@ -1,0 +1,17 @@
+*.bak
+*.qip
+*.qdf
+*.rpt
+*.qsf
+*.bsf
+*.ppf
+*.cmp
+*.sv
+*.flock
+db/
+output_files/
+greybox_tmp/
+incremental_db/
+simulation/
+.idea/
+__pycache__/
