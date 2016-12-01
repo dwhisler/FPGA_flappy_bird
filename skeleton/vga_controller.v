@@ -126,25 +126,7 @@ begin
 	  
 	  if (animation_count == 5'd25)
 		begin
-			animation_count = 5'd0;
-			if (bird_x <= screen_width-bird_width)
-			begin
-				bird_x = bird_x + 19'd1;
-			end
-			else
-			begin
-				bird_x = 19'd0;
-			end
-			
-			if (pipe_x <= screen_width-upper_pipe_width)
-			begin
-				pipe_x = pipe_x + 19'd1;
-			end
-			else
-			begin
-				pipe_x = 19'd0;
-			end
-			
+			animation_count = 5'd0;			
 			
 			lower_pipe_x <= pipe_x-lower_pipe_width/2;
 			lower_pipe_y <= pipe_y+gap_width/2;
@@ -186,24 +168,6 @@ begin
 	  if (animation_count == 5'd25)
 		begin
 			animation_count = 5'd0;
-			if (bird_x <= screen_width-bird_width)
-			begin
-				bird_x = bird_x + 19'd1;
-			end
-			else
-			begin
-				bird_x = 19'd0;
-			end
-			
-			if (pipe_x <= screen_width-upper_pipe_width)
-			begin
-				pipe_x = pipe_x + 19'd1;
-			end
-			else
-			begin
-				pipe_x = 19'd0;
-			end
-			
 			
 			lower_pipe_x <= pipe_x-lower_pipe_width/2;
 			lower_pipe_y <= pipe_y+gap_width/2;
