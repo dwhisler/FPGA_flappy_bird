@@ -1,10 +1,6 @@
-module processor(clock, reset, /*ps2_key_pressed, ps2_out, lcd_write, lcd_data,*/ bird_y);
+module processor(clock, reset, ps2_key_pressed, bird_y);
 
-	input clock, reset/*, ps2_key_pressed*/;
-	//input [7:0]	ps2_out;
-	
-	//output lcd_write;
-	//output [31:0] 	lcd_data;
+	input clock, reset, ps2_key_pressed;
 	
 	output [31:0] bird_y;
 
@@ -139,7 +135,7 @@ module processor(clock, reset, /*ps2_key_pressed, ps2_out, lcd_write, lcd_data,*
 	
 	wire [31:0] pickstatusout;
 	mux32bit2to1 pickstatus(32'b1, T, setx, pickstatusout);
-	register statusreg(clock, setx | alu_exception, reset, pickstatusout, status); // check if bex is supposed to reset
+	register statusreg(clock, setx | alu_exception | ps2_key_pressed, reset, pickstatusout, status); // check if bex is supposed to reset
 	
 	// X/M pipeline register
 	wire [31:0] XMIRin, XMIRout;
@@ -796,6 +792,7 @@ ctrl_readRegA, ctrl_readRegB, data_writeReg, data_readRegA, data_readRegB, bird_
 			assign data_readRegB = ctrl_readB_decoded[i] ? readOutB[i] : 32'bZ;
 			assign readOutA[i] = readOut[i];
 			assign readOutB[i] = readOut[i];
+
 			register onereg(.clock(clock), .ctrl_writeEnable(writeEn[i]),
 			.ctrl_reset(resets[i]), .writeIn(data_writeReg), .readOut(readOut[i]));			
 		end

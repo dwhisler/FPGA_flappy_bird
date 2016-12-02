@@ -44,19 +44,22 @@ module skeleton(resetn,
 	wire 	[31:0] lcd_write_data;
 	wire	[7:0]	 ps2_key_data;
 	wire			 ps2_key_pressed;
-	wire	[7:0]	 ps2_out;	
+	wire	[7:0]	 ps2_out;
+	wire space_pressed;
+	
+	assign space_pressed = ~ps2_out[7] & ~ps2_out[6] & ~ps2_out[5] & ps2_out[4] & ps2_out[3] & ps2_out[2] & ~ps2_out[1] & ps2_out[0];
 	
 	wire [31:0] bird_y;
 	
-	// clock divider (by 5, i.e., 10 MHz)
-	pll div(CLOCK_50,inclock);
-	//assign clock = CLOCK_50;
+	// clock divider (by 20, i.e., 2.5 MHz)
+	//pll div(.inclk0(CLOCK_50),.c0(inclock));
+	assign clock = CLOCK_50;
 	
 	// UNCOMMENT FOLLOWING LINE AND COMMENT ABOVE LINE TO RUN AT 50 MHz
-	assign clock = inclock;
+	//assign clock = inclock;
 	
 	// your processor
-	processor myprocessor(clock, ~resetn, /*ps2_key_pressed, ps2_out, lcd_write_en, lcd_write_data,*/ bird_y);
+	processor myprocessor(clock, ~resetn, ps2_key_pressed, bird_y);
 	
 	// keyboard controller
 	PS2_Interface myps2(clock, resetn, ps2_clock, ps2_data, ps2_key_data, ps2_key_pressed, ps2_out);
@@ -90,7 +93,6 @@ module skeleton(resetn,
 								 .b_data(VGA_B),
 								 .g_data(VGA_G),
 								 .r_data(VGA_R),
-								 .processor_CLK(clock),
 								 .bird_y_long(bird_y));
 	
 	

@@ -6,11 +6,9 @@ module vga_controller(iRST_n,
                       b_data,
                       g_data,
                       r_data,
-							 bird_y_long,
-							 processor_CLK);
+							 bird_y_long,);
 input iRST_n;
 input iVGA_CLK;
-input processor_CLK;
 output reg oBLANK_n;
 output reg oHS;
 output reg oVS;
@@ -106,15 +104,6 @@ video_sync_generator LTM_ins (.vga_clk(iVGA_CLK),
                               .VS(cVS));
 										
 										
-////
-//always @(posedge processor_CLK)
-//begin
-//	animation_count = animation_count + 1;
-//	if (animation_count == 9'd100);
-//	begin
-//		bird_y = bird_y_long[18:0];
-//	end
-//end
 
 
 
