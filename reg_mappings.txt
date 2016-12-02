@@ -1,0 +1,23 @@
+
+$r1 = Bird Y Position 
+
+$r2 = Reserved for pipes
+
+$r3 = Reserved for pipes
+
+$r4 = Reserved for pipes 
+
+$r5 = Reserved for pipes
+
+$r6 = Reserved for pipes
+
+$r7 = Delay (current 40,000)
+
+$r8 = Bird Lower Limit 
+
+$r9 = Bird Upper Limmit
+
+$r10 = PS2 Flag 
+
+$r11 = Game Status 
+
