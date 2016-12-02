@@ -9,7 +9,7 @@ $r4 = Reserved for pipes
 
 $r5 = Reserved for pipes
 
-$r6 = Reserved for pipes
+$r6 = Delay Counter
 
 $r7 = Delay (current 40,000)
 
@@ -21,3 +21,4 @@ $r10 = PS2 Flag
 
 $r11 = Game Status 
 
+$r12 = Animation Counter
