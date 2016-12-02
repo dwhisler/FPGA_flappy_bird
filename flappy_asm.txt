@@ -3,23 +3,31 @@ main: addi $r9, $r0, 100
 addi $r8, $r0, 1
 addi $r7, $r0, 40000
 addi $r1, $r0, 240
+addi $r13, $r0, 450
 
-up: addi $r1, $r1, -1
+falling: sub $r12, $r12, $r12
+bex up
+bne $r1, $r13, keep_falling
+j falling
+keep_falling: addi $r1, $r1, 1
+jal delay
+j falling
+
+up: setx 0
+bne $r1, $r0, keep_rising
+j falling
+keep_rising: addi $r1, $r1, -1
 addi $r12, $r12, 1
 jal delay
-sub $r6, $r6, $r6
-blt $r9, $r12, down
+blt $r9, $r12, falling
 j up
 
-down: addi $r1, $r1, 1
-addi $r12, $r12, -1
-jal delay
-sub $r6, $r6, $r6
-blt $12, $8, up
-j down
+reset_counter: sub $r12, $r12, $r12
+j up
 
 delay: addi $r6, $r6, 1
 bne $r6, $r7, delay
+sub $r6, $r6, $r6
 jr $r31
 
 

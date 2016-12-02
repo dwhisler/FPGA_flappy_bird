@@ -22,3 +22,5 @@ $r10 = PS2 Flag
 $r11 = Game Status 
 
 $r12 = Animation Counter
+
+$r13 = Bird lower limit
