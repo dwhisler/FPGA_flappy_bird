@@ -1,7 +1,7 @@
 .text 
 main: addi $r9, $r0, 100
 addi $r8, $r0, 1
-addi $r7, $r0, 400000
+addi $r7, $r0, 40000
 
 up: addi $r1, $r1, -1
 jal delay
@@ -15,7 +15,7 @@ sub $r6, $r6, $r6
 blt $1, $8, up
 j down
 
-delay:addi $r6, $r6, 1
+delay: addi $r6, $r6, 1
 bne $r6, $r7, delay
 jr $r31
 
